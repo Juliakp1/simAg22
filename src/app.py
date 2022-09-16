@@ -8,7 +8,16 @@ app = Flask(__name__)
 
 @app.before_first_request
 def executa_antes_do_primeiro_request():
-    pass
+    d = Disciplina("DevLife")
+    tur = Turma(d, "DevLife 2022/1")
+    estudante = Estudante("Diana Deana")
+    estudante.matricular(tur)
+    tarefa = Tarefa(tur, "Pedro Álvares Cabral")
+    tur.tarefas.append(tarefa)
+    resp = ['A', 'C', 'B']
+    sub = Submissao(tarefa, resp)
+    tarefa.submeter(resp, estudante)
+    return jsonify('Added!')
     
 # --------------------------------------------------- #
 
@@ -53,18 +62,18 @@ def listar_disciplinas(nome_estudante:str):
 
 # --------------------------------------------------- #
 
-@app.route("/add_all/")
-def creates_light_database():
-    d = Disciplina("DevLife")
-    tur = Turma(d, "DevLife 2022/1")
-    estudante = Estudante("Diana Deana")
-    estudante.matricular(tur)
-    tarefa = Tarefa(tur, "Pedro Álvares Cabral")
-    tur.tarefas.append(tarefa)
-    resp = ['A', 'C', 'B']
-    sub = Submissao(tarefa, resp)
-    tarefa.submeter(resp, estudante)
-    return jsonify('Added!')
+# @app.route("/add_all/")
+# def creates_light_database():
+#     d = Disciplina("DevLife")
+#     tur = Turma(d, "DevLife 2022/1")
+#     estudante = Estudante("Diana Deana")
+#     estudante.matricular(tur)
+#     tarefa = Tarefa(tur, "Pedro Álvares Cabral")
+#     tur.tarefas.append(tarefa)
+#     resp = ['A', 'C', 'B']
+#     sub = Submissao(tarefa, resp)
+#     tarefa.submeter(resp, estudante)
+#     return jsonify('Added!')
 
 # --------------------------------------------------- #
 
